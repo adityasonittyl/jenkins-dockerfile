@@ -7,8 +7,6 @@ pipeline {
         APP_NAME= "aditya-dev-app"
         GCP_ZONE = "us-central1-a"
         GKE_CLUSTER_NAME = "dev-onblick-apps-us-ct1-gke"
-        GIT_CREDS = ""
-        GIT_TOKEN = ""
     }
     stages {
         stage ('Main Stage') {
@@ -36,7 +34,7 @@ pipeline {
                     }
                     stage('Update yamls and create PR') {
                             script {
-                                withCredentials([file(credentialsId: '2c7bf841-a1b1-45ee-a7f5-be018000f828', variable: 'GITHUB_TOKEN')]){
+                                withCredentials([file(credentialsId: 'github-token-onblick', variable: 'GITHUB_TOKEN')]){
                                     sshagent (credentials: ['argocd-ssh-key']) {
                                         dir('dev'){
                                         sh '''

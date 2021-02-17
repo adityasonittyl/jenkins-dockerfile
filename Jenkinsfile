@@ -51,7 +51,7 @@ pipeline {
                                         git add .
                                         git commit -m "${GIT_COMMIT}" 
                                         git push origin pr-branch  
-                                        gh pr create --title "The bug is fixed" --body "Everything works again" --head
+                                        gh pr create --title "The bug is fixed" --body "Everything works again" --head pr-branch
                                         '''
                                         }
                                     }

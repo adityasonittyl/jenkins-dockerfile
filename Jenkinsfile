@@ -50,7 +50,6 @@ pipeline {
                                     git commit -m "${GIT_COMMIT}"
                                     git push origin pr-branch
                                     gh config set -h github.com git_protocol ssh
-                                    gh auth login
                                     gh pr create --title "The bug is fixed" --body "Everything works again" 
                                     '''
                                 }

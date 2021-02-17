@@ -7,6 +7,7 @@ pipeline {
         APP_NAME= "aditya-dev-app"
         GCP_ZONE = "us-central1-a"
         GKE_CLUSTER_NAME = "dev-onblick-apps-us-ct1-gke"
+
     }
     stages {
         stage ('Main Stage') {
@@ -46,9 +47,10 @@ pipeline {
                                         cat sample.yaml
                                         git add .  
                                         echo $GIT_COMMIT 
-                                        git commit -m "${GIT_COMMIT}"
-                                        git push origin pr-branch                                    
+                                        git commit -m "${GIT_COMMIT}"                                  
                                         gh auth login --with-token < $GITHUB_TOK
+                                        git push --set-upstream origin pr-branch
+                                        git push origin pr-branch  
                                         gh pr create --title "The bug is fixed" --body "Everything works again"
                                         '''
                                         }

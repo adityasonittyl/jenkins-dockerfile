@@ -49,6 +49,8 @@ pipeline {
                                     echo $GIT_COMMIT 
                                     git commit -m "${GIT_COMMIT}"
                                     git push origin pr-branch
+                                    gh config set git_protocol ssh
+                                    gh login
                                     gh pr create --title "The bug is fixed" --body "Everything works again" 
                                     '''
                                 }

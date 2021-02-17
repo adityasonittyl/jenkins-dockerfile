@@ -36,23 +36,24 @@ pipeline {
                     }
                     stage('Update yamls and create PR') {
                             script {
-                                withCredentials([file(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]){
-                                sshagent (credentials: ['argocd-ssh-key']) {
-                                    dir('dev'){
-                                    sh '''
-                                    git clone git@github.com:theadisoni/jenkins-argocd.git
-                                    cd jenkins-argocd
-                                    ls -lart
-                                    git checkout pr-branch
-                                    envsubst < sample.yaml.tpl > sample.yaml
-                                    cat sample.yaml
-                                    git add .  
-                                    echo $GIT_COMMIT 
-                                    git commit -m "${GIT_COMMIT}"
-                                    git push origin pr-branch                                    
-                                    gh auth login --with-token < $GITHUB_TOKEN
-                                    gh pr create --title "The bug is fixed" --body "Everything works again"
-                                    '''
+                                withCredentials([file(credentialsId: '2c7bf841-a1b1-45ee-a7f5-be018000f828', variable: 'GITHUB_TOKEN')]){
+                                    sshagent (credentials: ['argocd-ssh-key']) {
+                                        dir('dev'){
+                                        sh '''
+                                        git clone git@github.com:theadisoni/jenkins-argocd.git
+                                        cd jenkins-argocd
+                                        ls -lart
+                                        git checkout pr-branch
+                                        envsubst < sample.yaml.tpl > sample.yaml
+                                        cat sample.yaml
+                                        git add .  
+                                        echo $GIT_COMMIT 
+                                        git commit -m "${GIT_COMMIT}"
+                                        git push origin pr-branch                                    
+                                        gh auth login --with-token < $GITHUB_TOKEN
+                                        gh pr create --title "The bug is fixed" --body "Everything works again"
+                                        '''
+                                        }
                                     }
                                 }
                             }
@@ -61,7 +62,6 @@ pipeline {
                 }
             }
         }
-    }
 post {
         always {
             deleteDir() /* clean up our workspace */

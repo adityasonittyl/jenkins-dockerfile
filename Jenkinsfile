@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
         GCP_PROJECT_ID= "onblick-dev"
-        APP_NAME= "aditya-dev-app"
+        APP_NAME= "ajit-dev-app"
         GCP_ZONE = "us-central1-a"
         GKE_CLUSTER_NAME = "dev-onblick-apps-us-ct1-gke"
         GIT_CREDS = ""
@@ -22,6 +22,7 @@ pipeline {
                     stage("Build image") {
                         script {
                             sh '''
+                            cd sample-app/
                             docker build . -t gcr.io/${GCP_PROJECT_ID}/${APP_NAME}:${GIT_COMMIT}
                             '''
                         }
@@ -33,7 +34,27 @@ pipeline {
                             }
                         
                         }
-                    }    
+                    }
+                    stage('Update yamls and create PR') {
+                            script {
+                                sshagent (credentials: ['argocd-ssh-key']) {
+                                    dir('dev'){
+                                    sh '''
+                                    git clone git@github.com:theadisoni/jenkins-argocd.git
+                                    ls -lart
+                                    git checkout pr-branch
+                                    envsubst < sample.yaml.tpl > sample.yaml
+                                    cat sample.yaml
+                                    git add .  
+                                    echo $GIT_COMMIT 
+                                    git commit -m "${GIT_COMMIT}"
+                                    git push origin pr-branch
+                                    gh pr create --title "The bug is fixed" --body "Everything works again" 
+                                    '''
+                                }
+                            }
+                        }               
+                    }
                 }
             }
         }

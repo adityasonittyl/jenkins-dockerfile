@@ -49,7 +49,7 @@ pipeline {
                                     echo $GIT_COMMIT 
                                     git commit -m "${GIT_COMMIT}"
                                     git push origin pr-branch
-                                    git request-pull pr-branch git@github.com:theadisoni/jenkins-argocd.git main
+                                    git request-pull main git@github.com:theadisoni/jenkins-argocd.git pr-branch
                                     '''
                                 }
                             }

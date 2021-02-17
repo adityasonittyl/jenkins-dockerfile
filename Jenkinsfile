@@ -6,7 +6,7 @@ pipeline {
         GCP_PROJECT_ID= "onblick-dev"
         APP_NAME= "aditya-dev-app"
         GCP_ZONE = "us-central1-a"
-        GKE_CLUSTER_NAME = "dev-onblick-apps-us-ct1-gke"
+        GKE_CLUSTER_NAME = "dev-onblick-apps-us-ct1-gk"
 
     }
     stages {

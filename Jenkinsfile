@@ -45,11 +45,11 @@ pipeline {
                                         git checkout pr-branch
                                         envsubst < sample.yaml.tpl > sample.yaml
                                         cat sample.yaml
-                                        git add .  
-                                        echo $GIT_COMMIT 
-                                        git commit -m "${GIT_COMMIT}"                                  
+                                        echo $GIT_COMMIT                                  
                                         gh auth login --with-token < $GITHUB_TOK
                                         git push --set-upstream origin pr-branch
+                                        git add .
+                                        git commit -m "${GIT_COMMIT}" 
                                         git push origin pr-branch  
                                         gh pr create --title "The bug is fixed" --body "Everything works again"
                                         '''

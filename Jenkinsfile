@@ -34,7 +34,7 @@ pipeline {
                     }
                     stage('Update yamls and create PR') {
                             script {
-                                withCredentials([file(credentialsId: 'github-token-onblick', variable: 'GITHUB_TOKEN')]){
+                                withCredentials([file(credentialsId: 'github-token-onblick', variable: 'GITHUB_TOk')]){
                                     sshagent (credentials: ['argocd-ssh-key']) {
                                         dir('dev'){
                                         sh '''
@@ -48,7 +48,7 @@ pipeline {
                                         echo $GIT_COMMIT 
                                         git commit -m "${GIT_COMMIT}"
                                         git push origin pr-branch                                    
-                                        gh auth login --with-token < $GITHUB_TOKEN
+                                        gh auth login --with-token < $GITHUB_TOK
                                         gh pr create --title "The bug is fixed" --body "Everything works again"
                                         '''
                                         }

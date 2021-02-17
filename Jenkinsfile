@@ -4,7 +4,7 @@ pipeline {
     }
     environment {
         GCP_PROJECT_ID= "onblick-dev"
-        APP_NAME= "ajit-dev-app"
+        APP_NAME= "aditya-dev-app"
         GCP_ZONE = "us-central1-a"
         GKE_CLUSTER_NAME = "dev-onblick-apps-us-ct1-gke"
         GIT_CREDS = ""

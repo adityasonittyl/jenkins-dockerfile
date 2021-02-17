@@ -48,7 +48,6 @@ pipeline {
                                     git add .  
                                     echo $GIT_COMMIT 
                                     git commit -m "${GIT_COMMIT}"
-                                    git pull
                                     git push origin pr-branch
                                     gh config set git_protocol ssh
                                     gh login

@@ -49,8 +49,7 @@ pipeline {
                                     echo $GIT_COMMIT 
                                     git commit -m "${GIT_COMMIT}"
                                     git push origin pr-branch
-                                    gh config set -h github.com git_protocol ssh
-                                    gh pr create --title "The bug is fixed" --body "Everything works again" 
+                                    git request-pull pr-branch git@github.com:theadisoni/jenkins-argocd.git   master
                                     '''
                                 }
                             }

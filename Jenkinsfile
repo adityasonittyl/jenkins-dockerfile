@@ -22,7 +22,6 @@ pipeline {
                     stage("Build image") {
                         script {
                             sh '''
-                            cd sample-app/
                             docker build . -t gcr.io/${GCP_PROJECT_ID}/${APP_NAME}:${GIT_COMMIT}
                             '''
                         }

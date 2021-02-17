@@ -36,6 +36,7 @@ pipeline {
                     }
                     stage('Update yamls and create PR') {
                             script {
+                                withCredentials([file(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]){
                                 sshagent (credentials: ['argocd-ssh-key']) {
                                     dir('dev'){
                                     sh '''
@@ -48,9 +49,11 @@ pipeline {
                                     git add .  
                                     echo $GIT_COMMIT 
                                     git commit -m "${GIT_COMMIT}"
-                                    git push origin pr-branch
-                                    git request-pull main git@github.com:theadisoni/jenkins-argocd.git pr-branch
+                                    git push origin pr-branch                                    
+                                    gh auth login --with-token < $GITHUB_TOKEN
+                                    gh pr create --title "The bug is fixed" --body "Everything works again"
                                     '''
+                                    }
                                 }
                             }
                         }

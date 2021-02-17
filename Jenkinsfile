@@ -34,7 +34,7 @@ pipeline {
                     }
                     stage('Update yamls and create PR') {
                             script {
-                                withCredentials([file(credentialsId: 'github-token-onblick', variable: 'GITHUB_TOk')]){
+                                withCredentials([file(credentialsId: 'github-token-onblick', variable: 'GITHUB_TOK')]){
                                     sshagent (credentials: ['argocd-ssh-key']) {
                                         dir('dev'){
                                         sh '''

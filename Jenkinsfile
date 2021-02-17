@@ -40,6 +40,7 @@ pipeline {
                                     dir('dev'){
                                     sh '''
                                     git clone git@github.com:theadisoni/jenkins-argocd.git
+                                    cd jenkins-argocd
                                     ls -lart
                                     git checkout pr-branch
                                     envsubst < sample.yaml.tpl > sample.yaml
@@ -52,7 +53,7 @@ pipeline {
                                     '''
                                 }
                             }
-                        }               
+                        }
                     }
                 }
             }

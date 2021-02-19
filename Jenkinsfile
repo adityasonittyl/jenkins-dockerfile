@@ -47,7 +47,7 @@ pipeline {
                                         cat sample.yaml
                                         echo $GIT_COMMIT                                  
                                         gh auth login --with-token < $GITHUB_TOK
-                                        git push --set-upstream origin pr-branch
+                                        git push --set-upstream origin pr-branch-${GIT_COMMIT}
                                         git add .
                                         git commit -m "${GIT_COMMIT}" 
                                         git push origin pr-branch  

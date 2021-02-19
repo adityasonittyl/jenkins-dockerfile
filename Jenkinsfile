@@ -42,7 +42,7 @@ pipeline {
                                         git clone git@github.com:theadisoni/jenkins-argocd.git
                                         cd jenkins-argocd
                                         ls -lart
-                                        git checkout pr-branch
+                                        git checkout pr-branch-${GIT_COMMIT}
                                         envsubst < sample.yaml.tpl > sample.yaml
                                         cat sample.yaml
                                         echo $GIT_COMMIT                                  
@@ -51,7 +51,7 @@ pipeline {
                                         git add .
                                         git commit -m "${GIT_COMMIT}" 
                                         git push origin pr-branch  
-                                        gh pr create --title "The bug is fixed" --body "Everything works again" --head pr-branch
+                                        gh pr create --title "The bug is fixed" --body "Everything works again" --head pr-branch-${GIT_COMMIT}
                                         '''
                                         }
                                     }

@@ -50,7 +50,7 @@ pipeline {
                                         git push --set-upstream origin pr-branch-${GIT_COMMIT}
                                         git add .
                                         git commit -m "${GIT_COMMIT}" 
-                                        git push origin pr-branch  
+                                        git push origin pr-branch-${GIT_COMMIT}  
                                         gh pr create --title "The bug is fixed" --body "Everything works again" --head pr-branch-${GIT_COMMIT}
                                         '''
                                         }

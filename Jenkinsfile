@@ -42,7 +42,7 @@ pipeline {
                                         git clone git@github.com:theadisoni/jenkins-argocd.git
                                         cd jenkins-argocd
                                         ls -lart
-                                        git checkout pr-branch-${GIT_COMMIT}
+                                        git checkout -b pr-branch-${GIT_COMMIT}
                                         envsubst < sample.yaml.tpl > sample.yaml
                                         cat sample.yaml
                                         echo $GIT_COMMIT                                  
